@@ -1,19 +1,33 @@
 import { useState, useEffect } from 'react'
 
+interface data {
+  message: string
+}
+
 function App() {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<data | null>(null);
 
   useEffect(() => {
-    fetch('/api')
-      .then((req:any, res:any) => res.data)
-      .then((data:any) => setMessage(data.message));
-  }, []);
+    async function firstCall() {
+      try {
+        const response:any = await fetch('http://localhost:5001/api');
+        if (!response.ok) {
+          throw new Error(`HTTP error: , ${response.status}`);
+        }
+        const data:any = await response.json();
+        setMessage(data);
+        console.log(data);
+      } catch(error) {
+        console.error('Error message: ', error);
+      }
+    }
 
-  console.log(message);
+    firstCall();
+  }, []);
 
   return (
     <>
-      {message}
+      {message && message.message}
     </>
   )
 }
