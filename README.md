@@ -1,0 +1,11 @@
+- Server to-do
+  - <strike>CR</strike>UD Clients
+  - CRUD Locations
+  - CRUD Services
+  - CRUD Websites
+ 
+- Client to-do
+  - CRUD Clients
+  - CRUD Locations
+  - CRUD Services
+  - CRUD Websites
