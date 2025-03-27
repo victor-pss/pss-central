@@ -7,7 +7,16 @@ const clientController = require('../../../db/controllers/clientController');
 //  res.json({ message: 'test', payload: null });
 //});
 
+// /api/db/clients/
+
 router.get('/', clientController.getClients);
-router.get('/create_test', clientController.createClient);
+router.get('/name', clientController.getClientByName);
+router.get('/status/:status', clientController.getClientsByStatus);
+
+router.post('/create_test', clientController.createClient);
+
+router.get('/:id', clientController.getClientById);
+router.put('/:id', clientController.updateClientById);
+router.delete('/:id', clientController.deleteClientById);
 
 module.exports = router;

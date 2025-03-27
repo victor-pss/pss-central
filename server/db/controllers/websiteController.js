@@ -1,10 +1,11 @@
-const Client = require('../models/clients');
+// website controller
+const Website = require('../models/websites');
 
 /*******************************************
- * Schema: Clients
+ * Schema: Websites
  * -------------------
  * name: String
- * clientCode: String
+ * websiteCode: String
  * email: String
  * phone: String
  * status: Active | Inactive | Cancelling | Cancelled | Prospect
@@ -16,10 +17,10 @@ const Client = require('../models/clients');
  *
  *******************************************/
 
-const createClient = async (req, res) => {
+const createWebsite = async (req, res) => {
   try {
-    const newClient = new Client(req.body);
-    //const newClient = new Client({
+    const newWebsite = new Website(req.body);
+    //const newWebsite = new Website({
     //  name: "Victor Alcaraz",
     //  email: "vctralcaraz@gmail.com",
     //  status: "Active",
@@ -27,73 +28,73 @@ const createClient = async (req, res) => {
     //  created_at: new Date(),
     //  updated_at: new Date(),
     //});
-    const savedClient = await newClient.save();
-    res.status(201).json(savedClient);
+    const savedWebsite = await newWebsite.save();
+    res.status(201).json(savedWebsite);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const getClients = async (req, res) => {
+const getWebsites = async (req, res) => {
   try {
-    const allClients = await Client.find({})
-    res.status(200).json(allClients);
+    const allWebsites = await Website.find({})
+    res.status(200).json(allWebsites);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const getClientByName = async (req, res) => {
+const getWebsiteByName = async (req, res) => {
   try {
     const term = req.body.name;
     const query = { name: { $regex: term, $options: 'i' }};
     
-    const client = await Client.findOne(query);
-    res.status(200).json(client);
+    const website = await Website.findOne(query);
+    res.status(200).json(website);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const getClientById = async (req, res) => {
+const getWebsiteById = async (req, res) => {
   try {
-    const client = await Client.findById(req.params.id);
-    res.status(200).json(client);
+    const website = await Website.findById(req.params.id);
+    res.status(200).json(website);
   } catch (error) {
     res.status(500).json({ message: "The ID you are requesting does not exist!" });
   }
 };
 
-const getClientsByStatus = async (req, res) => {
+const getWebsitesByStatus = async (req, res) => {
   try {
     const query = { status: req.params.status };
     
-    const client = await Client.find(query);
-    res.status(200).json(client);
+    const website = await Website.find(query);
+    res.status(200).json(website);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const updateClientById = async (req, res) => {
+const updateWebsiteById = async (req, res) => {
   try {
     const body = req.body;
     const update = { ...body, updated_at: new Date() };
 
-    const client = await Client.findByIdAndUpdate(req.params.id, update);
-    res.status(200).json(client);
+    const website = await Website.findByIdAndUpdate(req.params.id, update);
+    res.status(200).json(website);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-const deleteClientById = async (req, res) => {
+const deleteWebsiteById = async (req, res) => {
   try {
-    const client = await Client.findByIdAndDelete(req.params.id);
-    res.status(200).json(client);
+    const website = await Website.findByIdAndDelete(req.params.id);
+    res.status(200).json(website);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { createClient, getClients, getClientByName, getClientById, getClientsByStatus, updateClientById, deleteClientById };
+module.exports = { createWebsite, getWebsites, getWebsiteByName, getWebsiteById, getWebsitesByStatus, updateWebsiteById, deleteWebsiteById };
