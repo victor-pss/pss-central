@@ -4,14 +4,14 @@ const Website = require('../models/websites');
 /*******************************************
  * Schema: Websites
  * -------------------
- * name: String
- * websiteCode: String
- * email: String
- * phone: String
- * status: Active | Inactive | Cancelling | Cancelled | Prospect
- * website_ids: Array of Website IDs
- * location_ids: Array of Location IDs
- * service_ids: Array of Service IDs
+ * url: String
+ * ip: String
+ * dns_hosts: Array of Strings
+ * registrar: String
+ * isProduction: Boolean
+ * status: Live | Suspended | Launching
+ * ssl_status: Valid | Invalid
+ * last_checked: Date
  * created_at: Date
  * updated_at: Date
  *
@@ -19,15 +19,19 @@ const Website = require('../models/websites');
 
 const createWebsite = async (req, res) => {
   try {
-    const newWebsite = new Website(req.body);
-    //const newWebsite = new Website({
-    //  name: "Victor Alcaraz",
-    //  email: "vctralcaraz@gmail.com",
-    //  status: "Active",
-    //  phone: "+19096451449",
-    //  created_at: new Date(),
-    //  updated_at: new Date(),
-    //});
+    //const newWebsite = new Website(req.body);
+    const newWebsite = new Website({
+      url: "plasticsurgerystudios.com",
+      ip: "92.204.128.116",
+      dns_hosts: ["ns1.psscloud.com", "ns2.psscloud.com", "ns3.psscloud.com", "ns4.psscloud.com"],
+      registrar: "GoDaddy",
+      isProduction: true,
+      status: "Live",
+      ssl_status: "Valid",
+      last_checked: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
     const savedWebsite = await newWebsite.save();
     res.status(201).json(savedWebsite);
   } catch (error) {
@@ -44,10 +48,10 @@ const getWebsites = async (req, res) => {
   }
 };
 
-const getWebsiteByName = async (req, res) => {
+const getWebsiteByUrl = async (req, res) => {
   try {
-    const term = req.body.name;
-    const query = { name: { $regex: term, $options: 'i' }};
+    const term = req.body.url;
+    const query = { url: { $regex: term, $options: 'i' }};
     
     const website = await Website.findOne(query);
     res.status(200).json(website);
@@ -97,4 +101,4 @@ const deleteWebsiteById = async (req, res) => {
   }
 };
 
-module.exports = { createWebsite, getWebsites, getWebsiteByName, getWebsiteById, getWebsitesByStatus, updateWebsiteById, deleteWebsiteById };
+module.exports = { createWebsite, getWebsites, getWebsiteByUrl, getWebsiteById, getWebsitesByStatus, updateWebsiteById, deleteWebsiteById };
