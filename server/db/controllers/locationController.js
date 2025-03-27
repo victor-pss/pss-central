@@ -21,22 +21,22 @@ const Location = require('../models/locations');
 
 const createLocation = async (req, res) => {
   try {
-    //const newLocation = new Location(req.body);
-    const newLocation = new Location({
-      name: "PSS HQ",
-      address: {
-        street: "8659 Have Ave",
-        city: "Rancho Cucamonga",
-        state: "CA",
-        zip: "91730",
-        country: "USA"
-      },
-      phone: "+19097588300",
-      email: "customerservice@plasticsurgerystudios.com",
-      status: "Active",
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    const newLocation = new Location(req.body);
+    //const newLocation = new Location({
+    //  name: "PSS HQ",
+    //  address: {
+    //    street: "8659 Have Ave",
+    //    city: "Rancho Cucamonga",
+    //    state: "CA",
+    //    zip: "91730",
+    //    country: "USA"
+    //  },
+    //  phone: "+19097588300",
+    //  email: "customerservice@plasticsurgerystudios.com",
+    //  status: "Active",
+    //  created_at: new Date(),
+    //  updated_at: new Date(),
+    //});
     const savedLocation = await newLocation.save();
     res.status(201).json(savedLocation);
   } catch (error) {

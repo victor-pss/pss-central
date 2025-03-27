@@ -15,14 +15,14 @@ const Service = require('../models/services');
 
 const createService = async (req, res) => {
   try {
-    //const newService = new Service(req.body);
-    const newService = new Service({
-      name: "SEO",
-      department: "Marketing",
-      description: "Search Engine Optimization for website rankings.",
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    const newService = new Service(req.body);
+    //const newService = new Service({
+    //  name: "SEO",
+    //  department: "Marketing",
+    //  description: "Search Engine Optimization for website rankings.",
+    //  created_at: new Date(),
+    //  updated_at: new Date(),
+    //});
     const savedService = await newService.save();
     res.status(201).json(savedService);
   } catch (error) {

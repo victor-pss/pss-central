@@ -19,19 +19,19 @@ const Website = require('../models/websites');
 
 const createWebsite = async (req, res) => {
   try {
-    //const newWebsite = new Website(req.body);
-    const newWebsite = new Website({
-      url: "plasticsurgerystudios.com",
-      ip: "92.204.128.116",
-      dns_hosts: ["ns1.psscloud.com", "ns2.psscloud.com", "ns3.psscloud.com", "ns4.psscloud.com"],
-      registrar: "GoDaddy",
-      isProduction: true,
-      status: "Live",
-      ssl_status: "Valid",
-      last_checked: new Date(),
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    const newWebsite = new Website(req.body);
+    //const newWebsite = new Website({
+    //  url: "plasticsurgerystudios.com",
+    //  ip: "92.204.128.116",
+    //  dns_hosts: ["ns1.psscloud.com", "ns2.psscloud.com", "ns3.psscloud.com", "ns4.psscloud.com"],
+    //  registrar: "GoDaddy",
+    //  isProduction: true,
+    //  status: "Live",
+    //  ssl_status: "Valid",
+    //  last_checked: new Date(),
+    //  created_at: new Date(),
+    //  updated_at: new Date(),
+    //});
     const savedWebsite = await newWebsite.save();
     res.status(201).json(savedWebsite);
   } catch (error) {
