@@ -11,10 +11,11 @@ const serviceController = require('../../../db/controllers/serviceController');
 // /api/db/services/
 
 router.get('/', serviceController.getServices);
-router.get('/url', serviceController.getServiceByName);
+router.post('/', serviceController.createService);
+
+router.get('/name', serviceController.getServiceByName);
 router.get('/status/:status', serviceController.getServicesByStatus);
 
-router.post('/create_test', serviceController.createService);
 
 router.get('/:id', serviceController.getServiceById);
 router.put('/:id', serviceController.updateServiceById);

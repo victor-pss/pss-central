@@ -11,10 +11,11 @@ const locationController = require('../../../db/controllers/locationController')
 // /api/db/locations/
 
 router.get('/', locationController.getLocations);
+router.post('/', locationController.createLocation);
+
 router.get('/name', locationController.getLocationByName);
 router.get('/status/:status', locationController.getLocationsByStatus);
 
-router.post('/create_test', locationController.createLocation);
 
 router.get('/:id', locationController.getLocationById);
 router.put('/:id', locationController.updateLocationById);

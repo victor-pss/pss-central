@@ -10,10 +10,11 @@ const clientController = require('../../../db/controllers/clientController');
 // /api/db/clients/
 
 router.get('/', clientController.getClients);
+router.post('/', clientController.createClient);
+
 router.get('/name', clientController.getClientByName);
 router.get('/status/:status', clientController.getClientsByStatus);
 
-router.post('/create_test', clientController.createClient);
 
 router.get('/:id', clientController.getClientById);
 router.put('/:id', clientController.updateClientById);

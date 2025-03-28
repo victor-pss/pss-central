@@ -15,7 +15,12 @@ const Service = require('../models/services');
 
 const createService = async (req, res) => {
   try {
-    const newService = new Service(req.body);
+    const service = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+    const newService = new Service(service);
     //const newService = new Service({
     //  name: "SEO",
     //  department: "Marketing",

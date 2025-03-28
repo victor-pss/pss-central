@@ -18,7 +18,12 @@ const Client = require('../models/clients');
 
 const createClient = async (req, res) => {
   try {
-    const newClient = new Client(req.body);
+    client = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date(),
+    }
+    const newClient = new Client(client);
     //const newClient = new Client({
     //  name: "Victor Alcaraz",
     //  email: "vctralcaraz@gmail.com",

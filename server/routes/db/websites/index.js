@@ -11,10 +11,11 @@ const websiteController = require('../../../db/controllers/websiteController');
 // /api/db/websites/
 
 router.get('/', websiteController.getWebsites);
+router.post('/', websiteController.createWebsite);
+
 router.get('/url', websiteController.getWebsiteByUrl);
 router.get('/status/:status', websiteController.getWebsitesByStatus);
 
-router.post('/create_test', websiteController.createWebsite);
 
 router.get('/:id', websiteController.getWebsiteById);
 router.put('/:id', websiteController.updateWebsiteById);

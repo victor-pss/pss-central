@@ -21,7 +21,12 @@ const Location = require('../models/locations');
 
 const createLocation = async (req, res) => {
   try {
-    const newLocation = new Location(req.body);
+    const loc = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+    const newLocation = new Location(loc);
     //const newLocation = new Location({
     //  name: "PSS HQ",
     //  address: {

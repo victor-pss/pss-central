@@ -19,7 +19,12 @@ const Website = require('../models/websites');
 
 const createWebsite = async (req, res) => {
   try {
-    const newWebsite = new Website(req.body);
+    const website = {
+      ...req.body,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+    const newWebsite = new Website(website);
     //const newWebsite = new Website({
     //  url: "plasticsurgerystudios.com",
     //  ip: "92.204.128.116",
