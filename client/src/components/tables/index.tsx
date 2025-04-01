@@ -62,7 +62,7 @@ const columns = [
   columnHelper.accessor('updated_at', {
     cell: info => {
       const date = new Date(info.getValue());
-      return date ? date.toLocaleDateString() : '';
+      return date ? `${date.toLocaleDateString()} ${date.toLocaleTimeString()}` : '';
     },
     footer: info => info.column.id,
   }),
