@@ -1,5 +1,6 @@
 // default table container
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   createColumnHelper,
@@ -65,10 +66,11 @@ const columns = [
       id: 'actions',
       cell: ({ row }) => (
         <div>
-          <button onClick={() => 
-            alert(
-              `Editing id ${row.original._id} - ${row.original.name}`
-            )}>Edit</button>
+          <Link to={{
+            pathname: `/clients/${row.original._id}`
+          }}>
+            <button type="button">Edit</button>
+          </Link>
           <button onClick={async () => {
             await fetch(
               `http://localhost:5001/api/db/clients/${row.original._id}`,
