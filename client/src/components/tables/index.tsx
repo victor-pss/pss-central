@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 
 type Client = {
+  _id: String,
   name: String,
   clientCode: String,
   phone: String,
@@ -19,18 +20,12 @@ type Client = {
 
 const defaultData: Client[] = [
   {
-    name: "Victor Alcaraz",
-    clientCode: "ALC.V.",
-    phone: "+19097588323",
-    email: "victor.alcaraz@plasticsurgerystudios.com",
-    status: "Active",
-    updated_at: new Date(),
-  },
-  {
-    name: "Michael Powers",
-    clientCode: "POW.M.",
-    phone: "+19097588300",
-    email: "michael@plasticsurgery.com",
+    _id: "",
+    name: "loading...",
+    clientCode: "",
+    phone: "",
+    email: "",
+    status: "",
     updated_at: new Date(),
   },
 ]
@@ -66,6 +61,22 @@ const columns = [
     },
     footer: info => info.column.id,
   }),
+    columnHelper.display({
+      id: 'actions',
+      cell: ({ row }) => (
+        <div>
+          <button onClick={() => 
+            alert(
+              `Editing id ${row.original._id} - ${row.original.name}`
+            )}>Edit</button>
+          <button onClick={async () => {
+            await fetch(
+              `http://localhost:5001/api/db/clients/${row.original._id}`,
+              { method: "delete"}
+            )}}>Delete</button>
+        </div>
+      )
+    }),
 ]
 
 const Table = () => {
